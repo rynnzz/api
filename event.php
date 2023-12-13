@@ -6,7 +6,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['action']) && $_GET['act
     exit;
 }
 
-// Handle POST request
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
 
@@ -49,7 +48,7 @@ function getEvents($conn) {
 }
 
 function handleDeleteEvent($data, $conn) {
-    if (!isset($data['id']) || !isset($data['category'])) {
+    if (!isset($data['id'])) {
         http_response_code(400);
         echo json_encode(["error" => "Invalid data"]);
         exit;

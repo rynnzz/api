@@ -2,7 +2,6 @@
 include('dbconfig.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Fetch all users
     $sql = "SELECT id_num, fname, mname, lname, gname, g_cnum, s_cnum, course, yr_and_sec FROM users";
     $result = $conn->query($sql);
 

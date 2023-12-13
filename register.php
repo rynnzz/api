@@ -17,10 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $s_cnum = $data['s_cnum'];
     $course = $data['course'];
     $yr_and_sec = $data['yr_and_sec'];
+    $status = $data['status'];
 
 
-    $sql = "INSERT INTO users (id_num, fname, mname, lname, address, age, b_date, password, gname, g_cnum, s_cnum, course, yr_and_sec) 
-            VALUES ('$id_num', '$fname', '$mname', '$lname', '$address', '$age', '$b_date', '$password', '$gname', '$g_cnum', '$s_cnum', '$course', '$yr_and_sec')";
+    $sql = "INSERT INTO users (id_num, fname, mname, lname, address, age, b_date, password, gname, g_cnum, s_cnum, course, yr_and_sec, status) 
+            VALUES ('$id_num', '$fname', '$mname', '$lname', '$address', '$age', '$b_date', '$password', '$gname', '$g_cnum', '$s_cnum', '$course', '$yr_and_sec', '$status')";
 
 
     if ($conn->query($sql) === TRUE) {

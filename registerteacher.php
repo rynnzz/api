@@ -7,10 +7,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $data['username'];
     $password = password_hash($data['password'], PASSWORD_DEFAULT);
 
+    $checkUsernameQuery = "SELECT * FROM teachers WHERE username = '$username'";
+    $checkUsernameResult = $conn->query($checkUsernameQuery);
+
+    if ($checkUsernameResult->num_rows > 0) {
+        echo json_encode(['success' => false, 'errorCode' => 'USERNAME_EXISTS', 'message' => 'Username already exists. Please choose a different username.']);
+        $conn->close();
+        exit;
+    }
 
     $sql = "INSERT INTO teachers (username, password) 
             VALUES ('$username', '$password')";
-
 
     if ($conn->query($sql) === TRUE) {
         echo json_encode(['success' => true]);

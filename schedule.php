@@ -1,13 +1,11 @@
 <?php
 include('dbconfig.php');
 
-// Handle GET request to fetch Schedules
 if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['action']) && $_GET['action'] === "getSchedules") {
     getSchedules($conn);
     exit;
 }
 
-// Handle POST request
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
 
@@ -31,7 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 function getSchedules($conn) {
-    // Adjust the SQL query to filter by the "schedule" category
     $sql = "SELECT * FROM posts WHERE category = 'Schedule' ORDER BY id DESC";
 
     $result = $conn->query($sql);
@@ -85,7 +82,6 @@ function handleUpdateSchedule($data, $conn) {
     $sql = "UPDATE posts SET content = '$content', date = '$date' WHERE id = '$id' AND category = '$category'";
 
     if ($conn->query($sql) === TRUE) {
-        // If the update is successful, you can send back the updated data
         $updatedData = ["id" => $id, "content" => $content, "date" => $date];
         echo json_encode(["message" => "Schedule updated successfully", "data" => $updatedData]);
     } else {

@@ -2,17 +2,14 @@
 include('dbconfig.php');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Get data from the request body
     $data = json_decode(file_get_contents("php://input"), true);
 
-    // Validate data (add more validation as needed)
     if (empty($data["content"]) || empty($data["date"]) || empty($data["category"])) {
         http_response_code(400);
         echo json_encode(["error" => "Invalid data"]);
         exit;
     }
 
-    // Insert data into the database
     $content = $conn->real_escape_string($data["content"]);
     $date = $conn->real_escape_string($data["date"]);
     $category = $conn->real_escape_string($data["category"]);
@@ -27,6 +24,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-// Close the database connection
 $conn->close();
 ?>

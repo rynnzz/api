@@ -29,7 +29,7 @@ if ($resultUser->num_rows > 0) {
     $row = $resultUser->fetch_assoc();
 
     if (password_verify($password, $row['password'])) {
-        $response = array("success" => true, "message" => "User login successful", "userFirstName" => $row['fname'], "userType" => "user");
+        $response = array("success" => true, "message" => "User login successful", "userData" => $row, "userType" => "user");
     } else {
         $response = array("success" => false, "message" => "Invalid ID or Password");
     }
@@ -39,7 +39,7 @@ if (!$response['success'] && $resultTeacher->num_rows > 0) {
     $rowTeacher = $resultTeacher->fetch_assoc();
 
     if (password_verify($password, $rowTeacher['password'])) {
-        $response = array("success" => true, "message" => "Teacher login successful", "userFirstName" => $rowTeacher['username'], "userType" => "teacher");
+        $response = array("success" => true, "message" => "Teacher login successful", "userData" => $rowTeacher, "userType" => "teacher");
     } else {
         $response = array("success" => false, "message" => "Invalid ID or Password for Teacher");
     }
@@ -49,7 +49,7 @@ if (!$response['success'] && $resultAdmin->num_rows > 0) {
     $rowAdmin = $resultAdmin->fetch_assoc();
 
     if (password_verify($password, $rowAdmin['password'])) {
-        $response = array("success" => true, "message" => "Admin login successful", "userFirstName" => $rowAdmin['username'], "userType" => "admin");
+        $response = array("success" => true, "message" => "Admin login successful", "userData" => $rowAdmin, "userType" => "admin");
     } else {
         $response = array("success" => false, "message" => "Invalid ID or Password for Admin");
     }

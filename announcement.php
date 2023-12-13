@@ -1,13 +1,10 @@
 <?php
-include_once('dbconfig.php');
+include('dbconfig.php');
 
-// Handle GET request to fetch announcements
 if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['action']) && $_GET['action'] === "getAnnouncements") {
     getAnnouncements($conn);
     exit;
 }
-
-// Handle POST request
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
 

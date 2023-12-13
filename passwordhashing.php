@@ -18,10 +18,8 @@ if ($result->num_rows > 0) {
         $username = $row['username'];
         $plainPassword = $row['password'];
 
-        // Hash the plain text password using password_hash
         $hashedPassword = password_hash($plainPassword, PASSWORD_DEFAULT);
 
-        // Update the 'admins' table with the hashed password
         $updateSql = "UPDATE admins SET password = '$hashedPassword' WHERE username = '$username'";
         if ($conn->query($updateSql) === TRUE) {
             echo "Password for admin with username $username updated successfully<br>";
@@ -33,6 +31,5 @@ if ($result->num_rows > 0) {
     echo "No admins found in the 'admins' table";
 }
 
-// Close the database connection
 $conn->close();
 ?>
