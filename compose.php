@@ -13,8 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $content = $conn->real_escape_string($data["content"]);
     $date = $conn->real_escape_string($data["date"]);
     $category = $conn->real_escape_string($data["category"]);
+    
+    // Check if 'urgent' key exists in $data and assign the value, or default to 0 (not urgent)
+    $urgent = isset($data["urgent"]) ? (int)$data["urgent"] : 0;
 
-    $sql = "INSERT INTO posts (content, date, category) VALUES ('$content', '$date', '$category')";
+    $sql = "INSERT INTO posts (content, date, category, urgent) VALUES ('$content', '$date', '$category', '$urgent')";
 
     if ($conn->query($sql) === TRUE) {
         echo json_encode(["message" => "Content posted successfully"]);

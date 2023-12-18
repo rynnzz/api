@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address = $data['address'];
     $age = $data['age'];
     $b_date = $data['b_date'];
-    $password = password_hash($data['password'], PASSWORD_DEFAULT);
+    $password = password_hash($data['password'], PASSWORD_BCRYPT, ['cost' => 12]);
     $gname = $data['gname'];
     $g_cnum = $data['g_cnum'];
     $s_cnum = $data['s_cnum'];
