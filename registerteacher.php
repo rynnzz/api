@@ -4,6 +4,9 @@ include('dbconfig.php');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
 
+    $fname = $data['fname'];
+    $mname = $data['mname'];
+    $mname = $data['mname'];
     $username = $data['username'];
     $password = password_hash($data['password'], PASSWORD_DEFAULT);
 
@@ -16,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $sql = "INSERT INTO teachers (username, password) 
-            VALUES ('$username', '$password')";
+    $sql = "INSERT INTO teachers (fname, mname, lname, username, password) 
+            VALUES ('$fname', '$mname', '$lname', '$username', '$password')";
 
     if ($conn->query($sql) === TRUE) {
         echo json_encode(['success' => true]);
